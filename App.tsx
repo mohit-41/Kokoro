@@ -4,6 +4,8 @@ import AppNavigation from './navigation/Navigation';
 import { ChatbotProvider, useChatbot } from './constants/ChatbotContext';
 import ChatBot from './components/ChatBot';
 import { Platform } from 'react-native';
+import  Dashboard  from "./screens/Dashboard";
+import LandingPage from "./screens/LandingPage";
 import {
   View,
   Image,
@@ -16,10 +18,12 @@ function App(): React.JSX.Element {
 
   return (
     <ThemeProvider>
-      <ChatbotProvider>
+      {/* <ChatbotProvider>
         <AppNavigation />
         <ChatBotOverlay />
-      </ChatbotProvider>
+      </ChatbotProvider> */}
+      {/* <Dashboard /> */}
+      <LandingPage />
 
       {/* <TouchableOpacity
         style={styles.chatbotToggle}

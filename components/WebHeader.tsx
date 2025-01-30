@@ -28,7 +28,7 @@ const WebHeader = ({navigation}: WebHeaderProps) => {
   )
 }
 
-export default WebHeader
+
 
 const styles = StyleSheet.create({
     webHeader:{
@@ -75,3 +75,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
       },
 })
+export default WebHeader

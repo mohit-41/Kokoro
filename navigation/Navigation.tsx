@@ -14,7 +14,7 @@ import Transformation from "../screens/4StepProcess/Transformation";
 import Target from "../screens/4StepProcess/Target";
 import Configure from "../screens/4StepProcess/Configure";
 import Error from "../screens/Error";
-import WebHeader from "../components/WebHeader";
+//import WebHeader from "../components/WebHeader";
 import { NavigationContainer } from "@react-navigation/native";
 
 
@@ -32,6 +32,7 @@ export type RootStackParamList = {
   Configure:undefined,
   Error: undefined,
   WebHeader: undefined;
+  home:undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

@@ -12,20 +12,20 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 // import { Video, AVPlaybackStatus } from 'expo-av';
 import MyLinearGradient from "../components/MyLinearGradient";
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from "../navigation/Navigation"
-import WebHeader from '../components/WebHeader';
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigation/Navigation";
+import WebHeader from "../components/WebHeader";
 
-type IngestionProps = NativeStackScreenProps<RootStackParamList, 'Ingestion'>
+type IngestionProps = NativeStackScreenProps<RootStackParamList, "Ingestion">;
 
-const Ingestion = ({ navigation }:IngestionProps) => {
+const Ingestion = ({ navigation }: IngestionProps) => {
   const [appName, setAppName] = useState("");
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const video = React.useRef(null);
+  //const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
 
-  const onDateChange = (event, selectedDate) => {
+  const onDateChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
     setShowDatePicker(false);
     setDate(currentDate);
@@ -76,33 +76,41 @@ const Ingestion = ({ navigation }:IngestionProps) => {
           )}
         </>
       )}
-      {Platform.OS === "web" && <WebHeader />}
+      {Platform.OS === "web" && <WebHeader navigation={navigation} route={route} />}
       <Text style={styles.title}>
-        Welcome To <Text style={styles.highlight}>Kokoro.doctor</Text> Ingestion
+        Welcome To <Text style={styles.highlight}>Metafied</Text> Ingestion
       </Text>
-      { Platform.OS!=='web' &&
-      <>
-        <Text style={styles.infoText}>
-          Create Ingestion Applications <Text style={styles.highlight}>10X</Text>{" "}
-          Faster. Ingest data from any source to any destination.
-        </Text>
-        <Text style={styles.infoText}>
-          Pre-built application templates{" "}
-          <Text style={styles.highlight}>Zero-code</Text>, wizard based
-          application builder.
-        </Text>
-        <Text style={styles.infoText}>
-          Native integration for all sources & targets.
-        </Text>
-      </>}
+      {Platform.OS !== "web" && (
+        <>
+          <Text style={styles.infoText}>
+            Create Ingestion Applications{" "}
+            <Text style={styles.highlight}>10X</Text> Faster. Ingest data from
+            any source to any destination.
+          </Text>
+          <Text style={styles.infoText}>
+            Pre-built application templates{" "}
+            <Text style={styles.highlight}>Zero-code</Text>, wizard based
+            application builder.
+          </Text>
+          <Text style={styles.infoText}>
+            Native integration for all sources & targets.
+          </Text>
+        </>
+      )}
 
-      { Platform.OS==='web' &&
-      <>
-        <Text style={styles.infoText}>
-          Create Ingestion Applications 10X Faster. Ingest data from any source to any destination.
-          <Text style={styles.lightText}>{" "}Pre-built application templates Zero-code, wizard based application builder. Native integration for all sources & targets.</Text>
-        </Text>
-      </>}
+      {Platform.OS === "web" && (
+        <>
+          <Text style={styles.infoText}>
+            Create Ingestion Applications 10X Faster. Ingest data from any
+            source to any destination.
+            <Text style={styles.lightText}>
+              {" "}
+              Pre-built application templates Zero-code, wizard based
+              application builder. Native integration for all sources & targets.
+            </Text>
+          </Text>
+        </>
+      )}
       <Text style={[styles.highlight, styles.WebText]}>
         Ingest Data from any Source to Target with simple steps
       </Text>
@@ -115,20 +123,21 @@ const Ingestion = ({ navigation }:IngestionProps) => {
           navigation.navigate("Features", { source: "Ingestion" });
         }}
       >
-        <Text style={styles.createButtonText}>Create {Platform.OS==='web' && "Ingestion Application"}</Text>
+        <Text style={styles.createButtonText}>
+          Create {Platform.OS === "web" && "Ingestion Application"}
+        </Text>
       </TouchableOpacity>
-      { Platform.OS!=='web' && ''
-      //   <Video
-      //   ref={video}
-      //   style={styles.videoPlayer}
-      //   source={{
-      //     uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      //   }}
-      //   useNativeControls
-      //   isLooping
-      //   onPlaybackStatusUpdate={status => setStatus(() => status)}
-      // />
-      }
+      {/* { Platform.OS!=='web' && 
+        <Video
+        ref={video}
+        style={styles.videoPlayer}
+        source={{
+          uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        }}
+        useNativeControls
+        isLooping
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />} */}
     </MyLinearGradient>
   );
 };
@@ -182,13 +191,13 @@ const styles = StyleSheet.create({
     fontSize: 34,
     marginBottom: 20,
     ...Platform.select({
-      web:{
+      web: {
         fontSize: 44,
-        width:"40%",
-        fontWeight:"bold",
-        marginTop:60,
-        marginLeft:100,
-      }
+        width: "40%",
+        fontWeight: "bold",
+        marginTop: 60,
+        marginLeft: 100,
+      },
     }),
   },
   infoText: {
@@ -196,37 +205,37 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 20,
     ...Platform.select({
-      web:{
-        width:"40%",
-        marginLeft:100,
-        fontWeight:"400",
-      }
+      web: {
+        width: "40%",
+        marginLeft: 100,
+        fontWeight: "400",
+      },
     }),
   },
-  lightText:{
+  lightText: {
     ...Platform.select({
-      web:{
+      web: {
         color: "#B7B7B7",
-      }
+      },
     }),
   },
-  WebText:{
-    fontSize:18,
+  WebText: {
+    fontSize: 18,
     ...Platform.select({
-      web:{
+      web: {
         fontSize: 30,
-        width:"34%",
-        marginTop:30,
-        marginLeft:800,
-      }
+        width: "34%",
+        marginTop: 30,
+        marginLeft: 800,
+      },
     }),
   },
   highlight: {
     color: "#4285F4",
     ...Platform.select({
-      web:{
+      web: {
         color: "#fff",
-      }
+      },
     }),
   },
   sampleButton: {
@@ -237,23 +246,23 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 20,
     ...Platform.select({
-      web:{
+      web: {
         backgroundColor: "#123AD4",
-        width:"20%",
-        marginTop:10,
-        marginLeft:400,
+        width: "20%",
+        marginTop: 10,
+        marginLeft: 400,
         borderRadius: 5,
-      }
+      },
     }),
   },
   sampleButtonText: {
     color: "#000",
     fontSize: 16,
     ...Platform.select({
-      web:{
-        color:"#fff",
-        textAlign:"center",
-      }
+      web: {
+        color: "#fff",
+        textAlign: "center",
+      },
     }),
   },
   createButton: {
@@ -264,22 +273,22 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: 20,
     ...Platform.select({
-      web:{
+      web: {
         backgroundColor: "#123AD4",
-        width:"20%",
-        marginLeft:400,
+        width: "20%",
+        marginLeft: 400,
         borderRadius: 5,
-      }
+      },
     }),
   },
   createButtonText: {
     color: "#000",
     fontSize: 16,
     ...Platform.select({
-      web:{
-        color:"#fff",
-        textAlign:"center",
-      }
+      web: {
+        color: "#fff",
+        textAlign: "center",
+      },
     }),
   },
   videoPlayer: {

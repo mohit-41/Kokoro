@@ -4,7 +4,7 @@ import MyLinearGradient from '../components/MyLinearGradient';
 import SearchBar, {SearchBarHandle} from '../components/SearchBar';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from "../navigation/Navigation"
-import WebHeader from '../components/WebHeader';
+import WebHeader from "../components/WebHeader";
 
 type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>
 
@@ -20,7 +20,7 @@ const Home = ({navigation}:HomeProps) => {
   return (
     <TouchableWithoutFeedback onPress={handleBlur}>
       <MyLinearGradient style={styles.container}>
-      {Platform.OS==='web' && <WebHeader/>}
+      {Platform.OS==='web' && <WebHeader navigation={navigation} route ={route}/>}
         <StatusBar barStyle="light-content" backgroundColor="#333" />
         {Platform.OS!=='web' &&
         <>
@@ -31,20 +31,20 @@ const Home = ({navigation}:HomeProps) => {
             </TouchableOpacity>
           </View>
           <Text style={styles.title}>
-            Welcome To <Text style={styles.highlight}>Kokoro.doctor</Text>
+            Welcome To <Text style={styles.highlight}>Metafied</Text>
           </Text>
           <TouchableOpacity style={styles.card} onPress={()=>{navigation.navigate('DataAssets')}}>
             <Image source={require('../assets/Images/img2.jpeg')} style={styles.cardImage} />
-            <Text style={styles.cardTitle}>Analyze Heart Reports</Text>
+            <Text style={styles.cardTitle}>Create Data Flow</Text>
             <Text style={styles.cardDescription}>
-              Upload angiography, ECG, or other heart related reoports for accurate AI-driven analysis and guidance.
+              Prepare, Cleanse, and move data from one or more sources to destinations.
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.card}>
             <Image source={require('../assets/Images/img1.jpeg')} style={styles.cardImage} />
-            <Text style={styles.cardTitle}>Heart Health Dashboard</Text>
+            <Text style={styles.cardTitle}>Visualize Data</Text>
             <Text style={styles.cardDescription}>
-              Create View personalized heart health insights, risk assessments and actionable recommendations.
+              Create dashboards and business Aplications to get outcomes, tell data storage and trigger actions.
             </Text>
           </TouchableOpacity>
         </>
@@ -53,24 +53,24 @@ const Home = ({navigation}:HomeProps) => {
         { Platform.OS==='web' &&
           <View style={styles.webCenter}>
             <View style={styles.profilesection}>
-              <TouchableOpacity>
-                <Image source={require('../assets/Images/profile.jpeg')} style={styles.profileImage} />
-              </TouchableOpacity>
+            <TouchableOpacity>
+              <Image source={require('../assets/Images/profile.jpeg')} style={styles.profileImage} />
+            </TouchableOpacity>
             </View>
             <View style={styles.webRight}>
               <View style={styles.cardsContainer}>
                 <TouchableOpacity style={styles.card} onPress={()=>{navigation.navigate('DataAssets')}}>
                   <Image source={require('../assets/Images/img2.jpeg')} style={styles.cardImage} />
-                  <Text style={styles.cardTitle}>Analyze Heart Reports</Text>
+                  <Text style={styles.cardTitle}>Create Data Flow</Text>
                   <Text style={styles.cardDescription}>
-                    Upload angiography, ECG, or other heart related reports for accurate AI-driven analysis and guidance.
+                    Prepare, Cleanse, and move data from one or more sources to destinations.
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.card}>
                   <Image source={require('../assets/Images/img1.jpeg')} style={styles.cardImage} />
-                  <Text style={styles.cardTitle}>Heart Health Dashboard</Text>
+                  <Text style={styles.cardTitle}>Visualize Data</Text>
                   <Text style={styles.cardDescription}>
-                    Create View personalized heart health insights, risk assessments, and actionable recommendations.
+                    Create dashboards and business Aplications to get outcomes, tell data storage and trigger actions.
                   </Text>
                 </TouchableOpacity>
               </View>
