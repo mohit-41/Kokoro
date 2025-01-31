@@ -18,12 +18,12 @@ function App(): React.JSX.Element {
 
   return (
     <ThemeProvider>
-      {/* <ChatbotProvider>
+      <ChatbotProvider>
         <AppNavigation />
         <ChatBotOverlay />
-      </ChatbotProvider> */}
+      </ChatbotProvider>
       {/* <Dashboard /> */}
-      <LandingPage />
+      {/* <LandingPage /> */}
 
       {/* <TouchableOpacity
         style={styles.chatbotToggle}

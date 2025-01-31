@@ -76,7 +76,7 @@ const Ingestion = ({ navigation }: IngestionProps) => {
           )}
         </>
       )}
-      {Platform.OS === "web" && <WebHeader navigation={navigation} route={route} />}
+      {Platform.OS === "web" && <WebHeader/>}
       <Text style={styles.title}>
         Welcome To <Text style={styles.highlight}>Metafied</Text> Ingestion
       </Text>

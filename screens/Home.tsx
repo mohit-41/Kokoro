@@ -20,7 +20,7 @@ const Home = ({navigation}:HomeProps) => {
   return (
     <TouchableWithoutFeedback onPress={handleBlur}>
       <MyLinearGradient style={styles.container}>
-      {Platform.OS==='web' && <WebHeader navigation={navigation} route ={route}/>}
+      {Platform.OS==='web' && <WebHeader/>}
         <StatusBar barStyle="light-content" backgroundColor="#333" />
         {Platform.OS!=='web' &&
         <>

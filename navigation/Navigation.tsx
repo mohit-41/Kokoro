@@ -32,7 +32,6 @@ export type RootStackParamList = {
   Configure:undefined,
   Error: undefined,
   WebHeader: undefined;
-  home:undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
