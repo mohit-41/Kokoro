@@ -7,17 +7,18 @@ import {
   StyleSheet,
   Image,
   StatusBar,
-  Alert,
+  ImageBackground,
 } from "react-native";
-import MyLinearGradient from "../components/MyLinearGradient";
 import { AuthContext } from "../contexts/AuthContext";
 import { useGoogleAuth } from "../utils/AuthService";
+import { Ionicons } from "@expo/vector-icons";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
-  const {login, googleLogin} = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const { login, googleLogin } = useContext(AuthContext);
   const [request, response, promptAsync] = useGoogleAuth();
 
   useEffect(() => {
@@ -32,152 +33,323 @@ const Login = ({ navigation }) => {
         });
     }
   }, [response, googleLogin, navigation]);
-  
-  // Function to trigger Google login
+
   const handleGoogleLogin = () => {
     if (request) {
-      promptAsync({ useProxy: false }); //opens the google login prompt
+      promptAsync({ useProxy: false });
     } else {
       console.log("Google auth request not ready yet");
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleRememberMe = () => {
+    setRememberMe(!rememberMe);
+  };
+
   return (
-    <MyLinearGradient style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#333" />
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate("LandingPage")}>
-          <Image
-            source={require("../assets/Images/NewLogo.png")}
-            style={styles.logo}
-          />
-        </TouchableOpacity>
-        <Text style={styles.title}>Welcome to Kokoro.doctor</Text>
-        <Text style={styles.subtitle}>Log in or Register your email.</Text>
+    <View style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
 
-        {/* Google Sign-In Button */}
-        <TouchableOpacity
-          style={styles.googleButton}
-          onPress={() => handleGoogleLogin()}
-          disabled={!request}
-        >
-          <Text style={styles.googleButtonText}>Continue with Google</Text>
-        </TouchableOpacity>
+      <View style={styles.mainContainer}>
+        {/* Left side with background image - 40% */}
+        <View style={styles.leftContainer}>
+          <ImageBackground
+            source={require("../assets/Images/login-background.png")}
+            style={styles.backgroundImage}
+            resizeMode="cover"
+          >
+            <Text style={styles.quoteText}>
+              "Nurture Your Heart. It Will Nurture You."
+            </Text>
+          </ImageBackground>
+        </View>
 
-        <View style={styles.line}></View>
+        {/* Rectangular divider */}
+        <View style={styles.divider} />
 
-        {/* Email Login Fields */}
-        <TextInput
-          style={[styles.input]}
-          placeholder="Enter your Email"
-          placeholderTextColor="#000"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={[styles.input]}
-          placeholder="Enter your Password"
-          placeholderTextColor="#000"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
+        {/* Right side with login form - 60% */}
+        <View style={styles.rightContainer}>
+          <View style={styles.mainright}>
+            <Text style={styles.title}>Welcome Back!</Text>
 
-        {/* Email Login Button */}
-        <TouchableOpacity style={styles.continueButton} onPress={() => {login(email, password, navigation)}}>
-          <Text style={styles.continueButtonText}>Login</Text>
-        </TouchableOpacity>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Email</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter your email"
+                placeholderTextColor="#999"
+                keyboardType="email-address"
+                value={email}
+                onChangeText={setEmail}
+              />
+            </View>
 
-        {/* Signup Button */}
-        <TouchableOpacity
-          style={styles.continueButton}
-          onPress={() => navigation.navigate("Signup")}
-        >
-          <Text style={styles.continueButtonText}>Sign Up</Text>
-        </TouchableOpacity>
+            <View style={styles.inputContainer}>
+              <Text style={styles.inputLabel}>Password</Text>
+              <View style={styles.passwordContainer}>
+                <TextInput
+                  style={styles.passwordInput}
+                  placeholder="Enter your password"
+                  placeholderTextColor="#999"
+                  secureTextEntry={!showPassword}
+                  value={password}
+                  onChangeText={setPassword}
+                  hidden
+                />
+                <TouchableOpacity
+                  style={styles.eyeIcon}
+                  onPress={togglePasswordVisibility}
+                >
+                  <Ionicons
+                    name={showPassword ? "eye-off" : "eye"}
+                    size={20}
+                    color="#999"
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.rememberForgotRow}>
+              <TouchableOpacity
+                style={styles.rememberMeContainer}
+                onPress={toggleRememberMe}
+              >
+                <View
+                  style={[styles.checkbox, rememberMe && styles.checkedBox]}
+                >
+                  {rememberMe && (
+                    <Ionicons name="checkmark" size={12} color="#FFF" />
+                  )}
+                </View>
+                <Text style={styles.rememberMeText}>Remember me</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => navigation.navigate("ForgotPassword")}
+              >
+                <Text style={styles.forgotPasswordText}>Forgot Password</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={styles.continueButton}
+              onPress={() => login(email, password, navigation)}
+            >
+              <Text style={styles.continueButtonText}>Sign in</Text>
+            </TouchableOpacity>
+
+            <View style={styles.orContainer}>
+              <View style={styles.orLine} />
+              <Text style={styles.orText}>Or</Text>
+              <View style={styles.orLine} />
+            </View>
+
+            <TouchableOpacity
+              style={styles.googleButton}
+              onPress={handleGoogleLogin}
+              disabled={!request}
+            >
+              <Image
+                source={require("../assets/Images/google-icon.png")}
+                style={styles.googleIcon}
+              />
+              <Text style={styles.googleButtonText}>Sign in with Google</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
-    </MyLinearGradient>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+  mainContainer: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  leftContainer: {
+    width: "40%",
+    backgroundColor: "transparent",
+    overflow: "hidden",
+  },
+  backgroundImage: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
-  logo: {
-    width: 150,
-    height: 150,
+  quoteText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+    lineHeight: 30,
+    textShadowColor: "rgba(0, 0, 0, 0.5)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+    width: "80%",
+  },
+  divider: {
+    width: "0.15%",
+    height: "100%",
+    backgroundColor: "#EEEEEE",
+  },
+  rightContainer: {
+    width: "60%",
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    paddingHorizontal: "5%",
+  },
+  mainright: {
+    width: "65%",
+    margin: "auto",
   },
   title: {
-    fontSize: 32,
-    color: "black",
-    marginTop: 20,
-    marginBottom: 30,
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: "4%",
   },
-  subtitle: {
+  inputContainer: {
+    marginBottom: "3%",
+    width: "100%",
+  },
+  inputLabel: {
     fontSize: 16,
-    color: "#B7B7B7",
-    marginBottom: 20,
+    color: "#333",
+    marginBottom: "1%",
+    fontWeight: "500",
   },
-  line: {
-    width: 250,
-    borderColor: "#D9D9D966",
-    borderWidth: 1,
-    marginBottom: 20,
-  },
-  googleButton: {
-    width: 300,
-    backgroundColor: "#4285F4",
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginBottom: 20,
-  },
-  googleButtonText: { color: "#D9D9D9", fontSize: 16, textAlign: "center" },
   input: {
-    width: 300,
-    backgroundColor: "#333",
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginBottom: 20,
-    color: "#000",
-    textAlign: "center",
-    backgroundColor: "#B8BAC24D",
+    height: 50,
+    minHeight: 48,
     borderWidth: 1,
-    borderColor: "#000",
-    borderRadius: 5,
+    borderColor: "#DDD",
+    borderRadius: 4,
+    paddingHorizontal: "3%",
+    fontSize: 16,
+    width: "100%",
+  },
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#DDD",
+    borderRadius: 4,
+    height: 50,
+    width: "100%",
+  },
+  passwordInput: {
+    flex: 1,
+    paddingHorizontal: "3%",
+    fontSize: 16,
+    height: "100%",
+    outlineStyle: "none",
+    borderWidth: 0,
+  },
+  eyeIcon: {
+    padding: "2%",
+  },
+  rememberForgotRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: "3%",
+    marginTop: "1%",
+  },
+  rememberMeContainer: {
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center",
+  },
+  checkbox: {
+    width: 18,
+    height: 18,
+    borderWidth: 1,
+    borderColor: "#999",
+    borderRadius: 3,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: "2%",
+    backgroundColor: "#FFF",
+  },
+  checkedBox: {
+    backgroundColor: "#10B981",
+    borderColor: "#10B981",
+  },
+  rememberMeText: {
+    fontSize: 14,
+    color: "#666",
+  },
+  forgotPasswordText: {
+    fontSize: 14,
+    color: "#666",
+    textDecorationLine: "underline",
   },
   continueButton: {
-    width: 300,
-    backgroundColor: "#333",
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+    backgroundColor: "#10B981",
+    width: "100%",
+    height: 50,
+    minHeight: 48,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    marginBottom: "2%",
   },
-  continueButtonText: { color: "#D9D9D9", fontSize: 16, textAlign: "center" },
-  logoutButton: {
-    width: 300,
-    backgroundColor: "#333",
-    paddingVertical: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+  continueButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
   },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
+  orContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    marginVertical: "3%",
   },
-  card: {
+  orLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#DDD",
+  },
+  orText: {
+    fontSize: 14,
+    color: "#666",
+    paddingHorizontal: "2%",
+  },
+  googleButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    height: 50,
+    minHeight: 48,
     borderWidth: 1,
-    borderRadius: 15,
-    padding: 15,
-    marginBottom: 10,
+    borderColor: "#DDD",
+    borderRadius: 4,
   },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+  googleIcon: {
+    width: 24,
+    height: 24,
+    marginRight: "2%",
+  },
+  googleButtonText: {
+    fontSize: 14,
+    color: "#666",
   },
 });
 
