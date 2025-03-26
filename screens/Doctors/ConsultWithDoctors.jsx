@@ -17,6 +17,7 @@ import SideBarNavigation from "../../components/SideBarNavigation";
 import Icon from "react-native-vector-icons/FontAwesome";
 import MyLinearGradient1 from "../../components/MyLinearGradient1";
 import DoctorResultShow from "./DoctorResultShow";
+import HeaderComponent from "../../components/HeaderComponent";
 
 const ConsultWithDoctors = ({ navigation }) => {
   const [selectedCards, setSelectedCards] = useState([]); // for selecting symptoms cards
@@ -74,73 +75,7 @@ const ConsultWithDoctors = ({ navigation }) => {
               {/* Right Section - Main Content */}
               <View style={styles.Right}>
                 {/* Header */}
-                <View style={styles.header}>
-                  <View style={styles.welcomeContainer}>
-                    <Text style={styles.welcomeText}>Welcome Alex!</Text>
-                    <Text style={styles.subText}>
-                      Here is your sales Medical dashboard
-                    </Text>
-                  </View>
-
-                  {/* Search Bar */}
-                  <View style={styles.searchContainer}>
-                    <Image
-                      source={require("../../assets/Icons/search.png")}
-                      style={styles.searchIcon}
-                      resizeMode="contain"
-                    />
-                    <TextInput
-                      style={styles.searchInput}
-                      placeholder="Search your query"
-                      placeholderTextColor="rgba(255, 255, 255, 1)"
-                    />
-                  </View>
-
-                  {/* Notification and Profile Section */}
-                  <View style={styles.iconsContainer}>
-                    <Image
-                      source={require("../../assets/Icons/notification1.png")}
-                      style={styles.notificationIcon}
-                      resizeMode="contain"
-                    />
-                  </View>
-                  {/* Profile Dropdown */}
-                  <View style={styles.profileWrapper}>
-                    <TouchableOpacity
-                      onPress={() => setIsDropdownOpen(!isDropdownOpen)}
-                      style={styles.profileContainer}
-                    >
-                      <Image
-                        source={require("../../assets/Icons/profile1.png")}
-                        style={styles.profileIcon}
-                        resizeMode="contain"
-                      />
-                      <Icon
-                        name={isDropdownOpen ? "caret-up" : "caret-down"}
-                        size={14}
-                        color="white"
-                        style={styles.caretIcon}
-                      />
-                    </TouchableOpacity>
-
-                    {/* Dropdown Content */}
-                    {isDropdownOpen && (
-                      <View style={styles.dropdownContainer}>
-                        <View style={styles.dropdownMenu}>
-                          <TouchableOpacity style={styles.dropdownItem}>
-                            <Text style={styles.dropdownText}>Profile</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={styles.dropdownItem}>
-                            <Text style={styles.dropdownText}>Settings</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={styles.dropdownItem}>
-                            <Text style={styles.dropdownText}>Logout</Text>
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    )}
-                  </View>
-                </View>
+                <HeaderComponent />
 
                 {/* 🔹 Gradient Section (Using MyLinearGradient) */}
                 <MyLinearGradient1 style={styles.gradientBox}>
@@ -340,8 +275,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#f0f0f0",
   },
   Right: {
-    flex: 1,
-    //alignItems: "center",
+    height: "100%",
+    width: "100%",
+   // gap: "2%",
   },
   header: {
     ...Platform.select({
@@ -392,7 +328,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(250, 124, 149)",
     flexDirection: "column",
     borderRadius: 5,
-    shadowColor: "#000", // Optional: add slight shadow for elevation
+    shadowColor: "#000", 
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 2,
@@ -424,7 +360,7 @@ const styles = StyleSheet.create({
   },
   symptomGrid: {
     flexDirection: "row",
-    flexWrap: "wrap", // Wrap items to next line
+    flexWrap: "wrap", 
     gap: 8,
     height: "90%",
     width: "100%",
@@ -441,7 +377,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: "4.6%",
     marginTop: "2%",
     backgroundColor: "#fff",
-    shadowColor: "#000", // Optional: add slight shadow for elevation
+    shadowColor: "#000", 
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 5,
@@ -453,7 +389,7 @@ const styles = StyleSheet.create({
 
   symptomText: {
     fontSize: 12,
-    color: "#333", // Dark text color
+    color: "#333", 
     textAlign: "center",
     fontWeight: "400",
   },

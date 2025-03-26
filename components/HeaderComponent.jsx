@@ -16,9 +16,7 @@ const HeaderComponent = () => {
     <View style={styles.header}>
       <View style={styles.welcomeContainer}>
         <Text style={styles.welcomeText}>Welcome Alex!</Text>
-        <Text style={styles.subText}>
-          Here is your sales Medical dashboard
-        </Text>
+        <Text style={styles.subText}>Here is your sales Medical dashboard</Text>
       </View>
 
       {/* Search Bar */}
@@ -37,15 +35,15 @@ const HeaderComponent = () => {
 
       {/* Notification and Profile Section */}
       <View style={styles.iconsContainer}>
-      
-        <Image
-          source={require("../assets/Icons/notification1.png")}
-          style={styles.notificationIcon}
-          resizeMode="contain"
-        />
-        
+        <TouchableOpacity onPress={() => Alert.alert("Notification")}>
+          <Image
+            source={require("../assets/Icons/notification1.png")}
+            style={styles.notificationIcon}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
       </View>
-      
+
       {/* Profile Dropdown */}
       <View style={styles.profileWrapper}>
         <TouchableOpacity
@@ -112,13 +110,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 8,
     paddingHorizontal: 15,
-    height: "50%",  // Use fixed height
+    height: "50%",  
     width: "30%",
     marginHorizontal: "10%",
     borderWidth: 1,
     borderColor: "rgba(255, 255, 255, 0.66)",
     alignItems: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.1)", // Light background for visibility
+    backgroundColor: "rgba(255, 255, 255, 0.1)", 
   },
   searchIcon: {
     width: 16,
@@ -126,13 +124,13 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   searchInput: {
-    flex: 1, // Makes input fill available space
+    flex: 1, 
     color: "#fff",
     fontSize: 16,
-    borderWidth: 0,  // Prevent extra border from appearing
-    backgroundColor: "transparent", // Ensures no extra background
-    paddingVertical: 0, // Prevents extra height
-    outlineStyle: "none", // Prevents blue outline on Web
+    borderWidth: 0,  
+    backgroundColor: "transparent", 
+    paddingVertical: 0, 
+    outlineStyle: "none", 
   },
   iconsContainer: {
     flexDirection: "row",
@@ -176,6 +174,7 @@ const styles = StyleSheet.create({
     paddingVertical: "2%",
     width: "100%",
     marginLeft: "100%",
+
   },
   dropdownItem: {
     paddingVertical: 10,

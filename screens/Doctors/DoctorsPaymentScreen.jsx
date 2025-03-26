@@ -16,6 +16,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useChatbot } from "../../contexts/ChatbotContext";
 import { useFocusEffect } from "@react-navigation/native";
 import SideBarNavigation from "../../components/SideBarNavigation";
+import HeaderComponent from "../../components/HeaderComponent"
 
 // Keep the existing GetLocationPolyfill
 const GetLocationPolyfill = {
@@ -124,53 +125,7 @@ const DoctorsPaymentScreen = ({ navigation, route}) => {
 
             <View style={styles.Right}>
               {/* Header section */}
-              <View style={styles.header}>
-                <View style={styles.welcomeSection}>
-                  <Text style={styles.welcomeText}>Welcome Alex!</Text>
-                  <Text style={styles.welcomeSubtext}>
-                    Here is your sales Medical dashboard
-                  </Text>
-                </View>
-
-                {/* Search bar */}
-                <View style={styles.searchBarContainer}>
-                  <MaterialIcons
-                    name="search"
-                    size={20}
-                    color="#888"
-                    style={styles.searchIcon}
-                  />
-                  <TextInput
-                    style={styles.searchInput}
-                    placeholder="Search your query"
-                    placeholderTextColor="#888"
-                    value={searchQuery}
-                    onChangeText={setSearchQuery}
-                  />
-                </View>
-
-                {/* User profile and notification icons */}
-                <View style={styles.userControls}>
-                  <TouchableOpacity style={styles.notificationIcon}>
-                    <MaterialIcons
-                      name="notifications"
-                      size={24}
-                      color="#fff"
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.profileButton}>
-                    <Image
-                      source={require("../../assets/Images/dr_kislay.jpg")}
-                      style={styles.profileImage}
-                    />
-                    <MaterialIcons
-                      name="arrow-drop-down"
-                      size={24}
-                      color="#fff"
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
+              <HeaderComponent />
 
               {/* Main content area */}
               <View style={styles.contentContainer}>

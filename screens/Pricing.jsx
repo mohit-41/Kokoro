@@ -13,6 +13,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import SideBarNavigation from "../components/SideBarNavigation";
 import HealthCarePlan from "../components/HealthCarePlan";
 import Header from "../components/Header";
+import HeaderComponent from "../components/HeaderComponent";
 
 const Pricing = ({ navigation, route }) => {
   const {width} = useWindowDimensions();

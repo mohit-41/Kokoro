@@ -17,6 +17,7 @@ import { useChatbot } from "../../contexts/ChatbotContext";
 import { useFocusEffect } from "@react-navigation/native";
 import SideBarNavigation from "../../components/SideBarNavigation";
 import Header from "../../components/Header";
+import HeaderComponent from "../../components/HeaderComponent";
 
 // Keep the existing GetLocationPolyfill
 const GetLocationPolyfill = {
@@ -216,52 +217,7 @@ const DoctorsInfoWithRating = ({ navigation, route }) => {
             </View>
 
             <View style={styles.Right}>
-              <View style={styles.header}>
-                {/* Welcome header section */}
-                <View style={styles.welcomeSection}>
-                  <Text style={styles.welcomeText}>Welcome Alex!</Text>
-                  <Text style={styles.welcomeSubtext}>
-                    Here is your sales Medical dashboard
-                  </Text>
-                </View>
-
-                {/* Search bar */}
-                <View style={styles.searchBarContainer}>
-                  <MaterialIcons
-                    name="search"
-                    size={20}
-                    color="#888"
-                    style={styles.searchIcon}
-                  />
-                  <TextInput
-                    style={styles.searchInput}
-                    placeholder="Search your query"
-                    placeholderTextColor="#888"
-                    value={searchQuery}
-                    onChangeText={setSearchQuery}
-                  />
-                </View>
-
-                {/* User profile and notification icons */}
-                <View style={styles.userControls}>
-                  <TouchableOpacity style={styles.notificationIcon}>
-                    <MaterialIcons
-                      name="notifications"
-                      size={24}
-                      color="#555"
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.profileButton}
-                    onPress={toggleDropdown}
-                  >
-                    <Image
-                      // source={require("../assets/Images/user-profile.png")} // Ensure this image exists
-                      style={styles.profileImage}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
+            <HeaderComponent />
 
               <View style={styles.contentContainer}>
                 {/* Doctor profile card */}
@@ -437,40 +393,40 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
   },
-  header: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 16,
-    backgroundColor: "transparent",
-  },
-  welcomeSection: {
-    flexDirection: "column",
-    flex: 1,
-  },
-  welcomeText: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "#fff",
-  },
-  welcomeSubtext: {
-    fontSize: 14,
-    color: "#f0f0f0",
-  },
-  searchBarContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-    width: "40%",
-    marginHorizontal: 20,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
+  // header: {
+  //   width: "100%",
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   padding: 16,
+  //   backgroundColor: "transparent",
+  // },
+  // welcomeSection: {
+  //   flexDirection: "column",
+  //   flex: 1,
+  // },
+  // welcomeText: {
+  //   fontSize: 26,
+  //   fontWeight: "bold",
+  //   color: "#fff",
+  // },
+  // welcomeSubtext: {
+  //   fontSize: 14,
+  //   color: "#f0f0f0",
+  // },
+  // searchBarContainer: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   backgroundColor: "#fff",
+  //   borderRadius: 20,
+  //   paddingHorizontal: 15,
+  //   paddingVertical: 8,
+  //   width: "40%",
+  //   marginHorizontal: 20,
+  // },
+  // searchIcon: {
+  //   marginRight: 8,
+  // },
   searchInput: {
     flex: 1,
     color: "#333",
